@@ -1,28 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import useOnlineStatus from "../hooks/useOnlineStatus";
 
 export default function SaveButton() {
-  const [isOnline, setIsOnline] = useState(true);
-
-  function handleOnline() {
-    setIsOnline(true);
-  }
-
-  function handleOffline() {
-    setIsOnline(false);
-  }
+  const isOnline = useOnlineStatus();
 
   function handleSave() {
-    console.log('Your data was saved');
+    console.log("Your data was saved");
   }
 
-  useEffect(() => {
-    window.addEventListener("online", handleOnline);
-    window.addEventListener("offline", handleOffline);
-
-    return () => {
-        window.removeEventListener("online", handleOnline);
-        window.removeEventListener("offline", handleOffline);
-    }
-  }, []);
-  return <button onClick={handleSave} disabled={!isOnline} >{isOnline ? "Save Progress" : "Reconnecting...."}</button>;
+  return (
+    <button onClick={handleSave} disabled={!isOnline}>
+      {isOnline ? "Save Progress" : "Reconnecting...."}
+    </button>
+  );
 }
