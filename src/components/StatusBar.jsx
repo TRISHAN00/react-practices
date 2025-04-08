@@ -1,18 +1,16 @@
-import React from 'react';
-import useOnlineStatus from '../hooks/useOnlineStatus';
+import React from "react";
+import useOnlineStatus from "../hooks/useOnlineStatus";
 
 export default function StatusBar() {
-
-
-
-const isOnline = useOnlineStatus();
-
-
-
+  const isOnline = useOnlineStatus();
 
   return (
-    <div>
-        <h1>{isOnline ? 'Online' : 'Disconnected'}</h1>
+    <div
+      className={`max-w-sm mx-auto mt-6 p-4 rounded-xl shadow-md text-white font-semibold text-center ${
+        isOnline ? "bg-green-500" : "bg-red-500"
+      }`}
+    >
+      <h1>{isOnline ? "🟢 You are Online" : "🔴 Disconnected"}</h1>
     </div>
-  )
+  );
 }
